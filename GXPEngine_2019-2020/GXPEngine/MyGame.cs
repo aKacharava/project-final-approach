@@ -9,9 +9,12 @@ public class MyGame : Game
     InterestList box1;
     InterestList box2;
     Text textBox1;
+    Text textBox2;
 
-    public MyGame() : base(1920,1080, false)		// Create a window that's 800x600 and NOT fullscreen
-	{
+
+
+    public MyGame() : base(1920, 1080, false)       // Create a window that's 800x600 and NOT fullscreen
+    {
         //----------------------------------------------------example-code----------------------------
         //create a canvas
         Canvas canvas = new Canvas(1920, 1080);
@@ -30,24 +33,25 @@ public class MyGame : Game
 
         box1 = new InterestList(500, 500, 1);
         AddChild(box1);
-        textBox1 = new Text(box1);
+        textBox1 = new Text(box1, "Dit is box 1 hai");
         AddChild(textBox1);
 
 
         box2 = new InterestList(500, 800, 2);
         AddChild(box2);
-
+        textBox2 = new Text(box2, "Dit is box 2 bai");
+        AddChild(textBox2);
 
 
     }
 
     void Update()
-	{
-		// Empty
-	}
+    {
+        // Empty
+    }
 
-	static void Main()							// Main() is the first method that's called when the program is run
-	{
-		new MyGame().Start();					// Create a "MyGame" and start it
-	}
+    static void Main()                          // Main() is the first method that's called when the program is run
+    {
+        new MyGame().Start();                   // Create a "MyGame" and start it
+    }
 }

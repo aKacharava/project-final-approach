@@ -37,9 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InterestList.cs" />
-    <Compile Include="..\..\..\Backup Code classes\FA backup classes\MyGame.cs">
-      <Link>MyGame.cs</Link>
-    </Compile>
     <Compile Include="GXPEngine\Canvas.cs" />
     <Compile Include="GXPEngine\Game.cs" />
     <Compile Include="GXPEngine\GameObject.cs" />
@@ -73,6 +70,7 @@
     <Compile Include="GXPEngine\AddOns\Window.cs" />
     <Compile Include="GXPEngine\AddOns\EasyDraw.cs" />
     <Compile Include="GXPEngine\Core\Collision.cs" />
+    <Compile Include="MyGame.cs" />
     <Compile Include="Text.cs" />
   </ItemGroup>
   <ItemGroup />
