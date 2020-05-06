@@ -4,11 +4,17 @@ using GXPEngine;								// GXPEngine contains the engine
 
 public class MyGame : Game
 {
-	public MyGame() : base(800, 600, false)		// Create a window that's 800x600 and NOT fullscreen
+
+
+    InterestList box1;
+    InterestList box2;
+    Text textBox1;
+
+    public MyGame() : base(1920,1080, false)		// Create a window that's 800x600 and NOT fullscreen
 	{
         //----------------------------------------------------example-code----------------------------
         //create a canvas
-        Canvas canvas = new Canvas(800, 600);
+        Canvas canvas = new Canvas(1920, 1080);
 
         //add some content
         canvas.graphics.FillRectangle(new SolidBrush(Color.Red), new Rectangle(0, 0, 400, 300));
@@ -19,6 +25,20 @@ public class MyGame : Game
         //add canvas to display list
         AddChild(canvas);
         //------------------------------------------------end-of-example-code-------------------------
+
+
+
+        box1 = new InterestList(500, 500, 1);
+        AddChild(box1);
+        textBox1 = new Text(box1);
+        AddChild(textBox1);
+
+
+        box2 = new InterestList(500, 800, 2);
+        AddChild(box2);
+
+
+
     }
 
     void Update()
