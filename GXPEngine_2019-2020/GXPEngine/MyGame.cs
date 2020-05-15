@@ -10,9 +10,6 @@ using System.Collections.Generic;
 //=======================================================================
 public class MyGame : Game
 {
-    InterestList box1;
-    InterestList box2;
-
     Text textBox1;
     Text textBox2;
     Text textBox3;
@@ -339,13 +336,6 @@ public class MyGame : Game
         {
             ProfilePage();
         }
-
-        if (ScreenNumber == 2)
-        {        
-            SettingsPage();
-        }
-
-
 
         if (Input.GetKeyDown(Key.Q))
         {
