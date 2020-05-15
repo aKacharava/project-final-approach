@@ -1,7 +1,13 @@
 using System;
 using System.Drawing;
 using GXPEngine;
+using System.Collections;
+using System.Collections.Generic;
 
+
+//=======================================================================
+//                                              MyGame Class
+//=======================================================================
 public class MyGame : Game
 {
     InterestList box1;
@@ -9,6 +15,11 @@ public class MyGame : Game
 
     Text textBox1;
     Text textBox2;
+    Text textBox3;
+    Text textBox4;
+    Text textBox5;
+    Text textBox6;
+    Text textBox7;
 
     Button _button1;
     Button _button2;
@@ -103,6 +114,47 @@ public class MyGame : Game
 
     bool _ending;
 
+    Text HobbyTextBox1;
+    Text HobbyTextBox2;
+    Text HobbyTextBox3;
+    Text HobbyTextBox4;
+    Text HobbyTextBox5;
+    Text HobbyTextBox6;
+    Text HobbyTextBox7;
+
+    int _BoxesXHobbies = 500;
+    int _BoxesYHobbies = 360;
+    int _BoxesXInterests = 500;
+    int _BoxesYInterests = 360;
+
+    int _musicVolume;
+    int _sfxVolume;
+
+    int ScreenNumber = 0;
+
+    Page BackgroundProfile;
+    Page BackgroundSettings;
+    Page BackgroundPersonality;
+
+    UpAndDownButton MusicVolumeButton;
+    Switch GenderSwitch;
+    GeneralText MusicVolumeText;
+
+    UpAndDownButton SFXVolumeButton;
+    GeneralText SFXVolumeText;
+
+    List<InterestList> ListOfInterests = new List<InterestList>();
+    List<Text> ListOfText = new List<Text>();
+    List<Text> InterestList = new List<Text>();
+    List<InterestList> ListOfHobbies = new List<InterestList>();
+    List<Text> HobbiesList = new List<Text>();
+
+    NextButton Next;
+
+    bool _profileActive;
+    bool _personalityActive;
+    bool _settingsActive;
+
     public MyGame() : base(1920, 1080, false, false)
     {
         targetFps = 60;
@@ -126,31 +178,34 @@ public class MyGame : Game
 
         _frametimer /= 60;
 
-        //box1 = new InterestList(500, 500, 1);
-        //AddChild(box1);
-        //textBox1 = new Text(box1, "Dit is box 1 hai");
-        //AddChild(textBox1);
-
-        //box2 = new InterestList(500, 800, 2);
-        //AddChild(box2);
-        //textBox2 = new Text(box2, "Dit is box 2 bai");
-        //AddChild(textBox2);
-
         _dateSuccess = 0;
         _gender = 0;
+
+        Next = new NextButton();
+        Next.SetXY(900, 900);
+        AddChild(Next);
+
+       
+        PersonalityPageLoader();
+        ProfilePageLoader();
+        SettingsLoader();
+     
+        BackgroundPersonality.visible = false;
+        BackgroundProfile.visible = false;
+        BackgroundSettings.visible = false;
 
         if (_gender == _female)
         {
             // Questions Sam
             _question1 = "Nervous?";
-            _question2 = "Don’t be shy, I don’t bite";
-            _question3 = "… … …";
+            _question2 = "Donï¿½t be shy, I donï¿½t bite";
+            _question3 = "ï¿½ ï¿½ ï¿½";
             _question4 = "How old are you?";
             _question5 = "What do you do for a living?";
             _subQuestion1 = "You must like animals?";
             _subQuestion2 = "Lizards are cool. Do you have any yourself?";
-            _subQuestion3 = "I guess I’m neutral… Not like but not dislike.";
-            _subQuestion4 = "Oh those things…";
+            _subQuestion3 = "I guess Iï¿½m neutralï¿½ Not like but not dislike.";
+            _subQuestion4 = "Oh those thingsï¿½";
             _question6 = "What do you like to do on the weekends?";
             _subQuestion5 = "What kind of books do you read?";
             _subQuestion6 = "Probably fantasy as well.";
@@ -161,38 +216,37 @@ public class MyGame : Game
             _question9 = "What size are you?";
             _subQuestion9 = "Yeah, clothing.";
             _subQuestion10 = "No, I mean how tall you are.";
-            _subQuestion11 = "No, your ‘size’.";
+            _subQuestion11 = "No, your ï¿½sizeï¿½.";
             _question10 = "What is your favorite thing to do with friends?";
             _subQuestion12 = "DnD? What is that?";
             _subQuestion13 = "Oh nice, do you dm or just play?";
-            _subQuestion14 = "DnD? You’re a nerd.";
+            _subQuestion14 = "DnD? Youï¿½re a nerd.";
 
             // Answers Sam
-            _answers1 = "Yeah, first time speeddating haha… ";
-            _answers2 = "Haha… I know…";
-            _answers3 = "… … …";
-            _answers4 = "I’m twentyone almost twentytwo.";
-            _answers5 = "I’m a student, I’m studying to become a vet.";
+            _answers1 = "Yeah, first time speeddating hahaï¿½ ";
+            _answers2 = "Hahaï¿½ I knowï¿½";
+            _answers3 = "ï¿½ ï¿½ ï¿½";
+            _answers4 = "Iï¿½m twentyone almost twentytwo.";
+            _answers5 = "Iï¿½m a student, Iï¿½m studying to become a vet.";
             _subAnswer1 = "Yes all animals are great. The once I like the most are reptiles like \n lizards.";
             _subAnswer2 = "Yes I own two, also a snake.";
-            _subAnswer3 = "That’s fine.";
-            _subAnswer4 = "You don’t like them…";
+            _subAnswer3 = "Thatï¿½s fine.";
+            _subAnswer4 = "You donï¿½t like themï¿½";
             _answers6 = "I guess reading.";
-            _subAnswer5 = "Mostly fantasy… a-and you?";
+            _subAnswer5 = "Mostly fantasyï¿½ a-and you?";
             _subAnswer6 = "Really, maybe you can recommend me some books.";
             _subAnswer7 = "Ah I know uhm.. a few book like that.";
-            _subAnswer8 = "I see…";
+            _subAnswer8 = "I seeï¿½";
             _answers7 = "Really, it is one of my favorites. Glad you like it.";
-            _answers8 = "Like a… housecat. Just napping in the sun on a nice pillow sounds \n nice.";
+            _answers8 = "Like aï¿½ housecat. Just napping in the sun on a nice pillow sounds \n nice.";
             _answers9 = "Size, you mean clothing right?";
-            _subAnswer9 = "Oh, just a M…";
-            _subAnswer10 = "Uhm… 1.65 I think…";
+            _subAnswer9 = "Oh, just a Mï¿½";
+            _subAnswer10 = "Uhmï¿½ 1.65 I thinkï¿½";
             _subAnswer11 = "W-why would you want to know that!";
             _answers10 = "I like to play DnD with them.";
             _subAnswer12 = "Oh it is a kind of game.";
-            _subAnswer13 = "I prefer just playing… I'm not really suited for dming… ";
-            _subAnswer14 = "What? No…";
-
+            _subAnswer13 = "I prefer just playingï¿½ I'm not really suited for dmingï¿½ ";
+            _subAnswer14 = "What? Noï¿½";
             _textboxText = "Hi, I'm Sam. So...";
             _text1 = _question1;
             _text2 = _question2;
@@ -212,7 +266,7 @@ public class MyGame : Game
             _subQuestion2 = "Just a bit of reading.";
             _subQuestion3 = "Staring at the celling contemplating life and existence \n itself.";
             _subQuestion4 = "My best friend, I need someone to spend time with.";
-            _subQuestion5 = "Phone, even if I can’t call for help I can keep myself \n entertained.";
+            _subQuestion5 = "Phone, even if I canï¿½t call for help I can keep myself \n entertained.";
             _subQuestion6 = "A gun, to kill myself and this stupid question.";
             _subQuestion7 = "So is your size?";
             _subQuestion8 = "What do you do for a living?";
@@ -222,27 +276,27 @@ public class MyGame : Game
             _subQuestion9 = "No, I prefer staying home.";
 
             // Answers Isabella
-            _answers1 = "Aww don’t be nervous. It is fun. So anyway, you like going out? \n Like going for a drink?";
-            _answers2 = "Well let’s hope today is the last time for both of us. So anyway, you \n like going out? Like going for a drink?";
-            _answers3 = "So you’re getting the hang of it, that’s good. So anyway, you like \n going out? Like going for a drink?";
-            _answers4 = "I didn’t mean the alcohol necessary…";
+            _answers1 = "Aww donï¿½t be nervous. It is fun. So anyway, you like going out? \n Like going for a drink?";
+            _answers2 = "Well letï¿½s hope today is the last time for both of us. So anyway, you \n like going out? Like going for a drink?";
+            _answers3 = "So youï¿½re getting the hang of it, thatï¿½s good. So anyway, you like \n going out? Like going for a drink?";
+            _answers4 = "I didnï¿½t mean the alcohol necessaryï¿½";
             _answers5 = "Me too, going out and socializing is amazing. I know this amazing \n bar, the atmosphere is so great. And there are so many nice people. \n Maybe we can go there after this.";
-            _answers6 = "Staying at home? That’s too bad. I personally like going out a lot. \n But what do you do then when you stay home?";
-            _subAnswer1 = "Watching stuff. I like to do that when I don’t have anything to do. \n There are so many interesting series to watch but so little time to watch them.";
+            _answers6 = "Staying at home? Thatï¿½s too bad. I personally like going out a lot. \n But what do you do then when you stay home?";
+            _subAnswer1 = "Watching stuff. I like to do that when I donï¿½t have anything to do. \n There are so many interesting series to watch but so little time to watch them.";
             _subAnswer2 = "Reading huh. Sounds nice, sitting comfy at home getting sucked into \n a story. Maybe I should read more myself. Maybe you can recommend \n some titles later.";
             _subAnswer3 = "Are you okay? Maybe you should talk to someone about it.";
-            _subAnswer4 = "So it may be a bit cliché but it is an interesting question. What would \n you take with you when going to a deserted island?";
+            _subAnswer4 = "So it may be a bit clichï¿½ but it is an interesting question. What would \n you take with you when going to a deserted island?";
             _subAnswer5 = "Sounds like a fun time. Mind if I you as well. A island is not really \n deserted when people are there. And together it will be easier to \n leave.";
-            _subAnswer6 = "Guess that is important. But what if there is no internet, it can’t really \n do anything without it.";
-            _subAnswer7 = "Well you didn’t have to say it like that…";
+            _subAnswer6 = "Guess that is important. But what if there is no internet, it canï¿½t really \n do anything without it.";
+            _subAnswer7 = "Well you didnï¿½t have to say it like thatï¿½";
             _subAnswer8 = "Tell you mine if you tell me yours.";
-            _answers7 = "I’m a biology teacher. It is both beautiful and sad when a year passes \n and you have to say goodbye to another group. But I love teaching \n the children and seeing them grow as humans.";
-            _answers8 = "I like climbing. Usually indoors but I love to climb real mountains. \n I have done it a few times already. You feel so alive when you’re at \n the top. Do you like climbing?";
-            _answers9 = "Let go climbing together after this. We can go to a hall close to here \n or maybe we can go to a real mountain. I’m planning to go to Nepal \n next to climb Mera Peak.";
-            _subAnswer9 = "That’s nice. Moving around makes you feel good, right? I don’t mind \n other kinds of exercise but personally climbing is my favorite.";
-            _subAnswer10 = "That’s too bad.";
+            _answers7 = "Iï¿½m a biology teacher. It is both beautiful and sad when a year passes \n and you have to say goodbye to another group. But I love teaching \n the children and seeing them grow as humans.";
+            _answers8 = "I like climbing. Usually indoors but I love to climb real mountains. \n I have done it a few times already. You feel so alive when youï¿½re at \n the top. Do you like climbing?";
+            _answers9 = "Let go climbing together after this. We can go to a hall close to here \n or maybe we can go to a real mountain. Iï¿½m planning to go to Nepal \n next to climb Mera Peak.";
+            _subAnswer9 = "Thatï¿½s nice. Moving around makes you feel good, right? I donï¿½t mind \n other kinds of exercise but personally climbing is my favorite.";
+            _subAnswer10 = "Thatï¿½s too bad.";
 
-            _textboxText = "Hello, I’m Isabella. Nice to meet you. So is this your first time speed \n dating?";
+            _textboxText = "Hello, Iï¿½m Isabella. Nice to meet you. So is this your first time speed \n dating?";
             _text1 = _question1;
             _text2 = _question2;
             _text3 = _question3;
@@ -257,6 +311,9 @@ public class MyGame : Game
         AddChild(_button3);
     }
 
+    //=======================================================================
+    //                                              Update();
+    //=======================================================================
     void Update()
     {
         if (_gender == _female)
@@ -270,6 +327,44 @@ public class MyGame : Game
 
         CheckTimer();
         CheckEnding();
+
+        SettingsValues();
+
+        if (ScreenNumber == 0)
+        {
+            PersonalityPage();
+        }
+
+        if (ScreenNumber == 1)
+        {
+            ProfilePage();
+        }
+
+        if (ScreenNumber == 2)
+        {        
+            SettingsPage();
+        }
+
+
+
+        if (Input.GetKeyDown(Key.Q))
+        {
+            ScreenNumber = 0;
+        }
+        if (Input.GetKeyDown(Key.W))
+        {
+            ScreenNumber = 1;
+
+        }
+        if (Input.GetKeyDown(Key.E))
+        {
+            ScreenNumber = 2;
+
+        }
+
+        HideSettings();
+        HideProfile();
+        HidePersonality();
     }
 
     void CheckTimer()
@@ -291,7 +386,7 @@ public class MyGame : Game
 
             if (_text1 == "*Well, damn...*" && _gender == _male)
             {
-                _textboxText = "Oh… Its time… um goodbye…";
+                _textboxText = "Ohï¿½ Its timeï¿½ um goodbyeï¿½";
             }
             else if (_text1 == "*Well, damn...*" && _gender == _female)
             {
@@ -426,7 +521,7 @@ public class MyGame : Game
         {
             switch (_text2)
             {
-                case "Don’t be shy, I don’t bite":
+                case "Donï¿½t be shy, I donï¿½t bite":
                     _charater.currentFrame = _shyEmotionSam;
                     _text1 = _question4;
                     _text2 = _question5;
@@ -449,7 +544,7 @@ public class MyGame : Game
                     _textboxText = _subAnswer1;
                     _dateSuccess += 2;
                     break;
-                case "I guess I’m neutral… Not like but not dislike.":
+                case "I guess Iï¿½m neutralï¿½ Not like but not dislike.":
                     _charater.currentFrame = _neutralEmotionSam;
                     _text1 = _question7;
                     _text2 = _question8;
@@ -497,7 +592,7 @@ public class MyGame : Game
         {
             switch (_text3)
             {
-                case "… … …":
+                case "ï¿½ ï¿½ ï¿½":
                     _charater.currentFrame = _uninterestedEmotionSam;
                     _text1 = _question4;
                     _text2 = _question5;
@@ -513,7 +608,7 @@ public class MyGame : Game
                     _textboxText = _answers6;
                     _dateSuccess += 1;
                     break;
-                case "Oh those things…":
+                case "Oh those thingsï¿½":
                     _charater.currentFrame = _insultedEmotionSam;
                     _text1 = _question7;
                     _text2 = _question8;
@@ -545,7 +640,7 @@ public class MyGame : Game
                     _textboxText = _answers9;
                     _dateSuccess -= 1;
                     break;
-                case "No, your ‘size’.":
+                case "No, your ï¿½sizeï¿½.":
                     _charater.currentFrame = _insultedEmotionSam;
                     _text1 = "*Say goodbyes*";
                     _text2 = " ";
@@ -553,7 +648,7 @@ public class MyGame : Game
                     _textboxText = _subAnswer11;
                     _dateSuccess -= 2;
                     break;
-                case "DnD? You’re a nerd.":
+                case "DnD? Youï¿½re a nerd.":
                     _charater.currentFrame = _insultedEmotionSam;
                     _text1 = "*Say goodbyes*";
                     _text2 = " ";
@@ -681,7 +776,7 @@ public class MyGame : Game
                     _text3 = " ";
                     _textboxText = _subAnswer2;
                     break;
-                case "Phone, even if I can’t call for help I can keep myself \n entertained.":
+                case "Phone, even if I canï¿½t call for help I can keep myself \n entertained.":
                     _charater.currentFrame = _neutralEmotionIsabella;
                     _text1 = _subQuestion7;
                     _text2 = _subQuestion8;
@@ -782,8 +877,295 @@ public class MyGame : Game
         _button3.UpdateText(_text3);
     }
 
+
+    //=======================================================================
+    //                                              Main();
+    //=======================================================================
     static void Main()                          // Main() is the first method that's called when the program is run
     {
         new MyGame().Start();                   // Create a "MyGame" and start it
+    }
+
+    //=======================================================================//   
+    //                                    Methods for Loading                                                     //SettingsValues(); and -Loader(); should be put inside MyGame();, The others in Update();
+    //=======================================================================//
+    public void SettingsValues()
+    {
+
+        _musicVolume = MusicVolumeButton.ReturnValueInt();
+        _sfxVolume = SFXVolumeButton.ReturnValueInt();
+
+        MusicVolumeButton._active = _settingsActive;
+        SFXVolumeButton._active = _settingsActive;
+
+        for (int i = 0; i < ListOfHobbies.Count; i++)
+        {
+            ListOfHobbies[i]._active = _profileActive;
+            Console.WriteLine(ListOfHobbies[i]._active);
+
+        }
+
+        for (int i = 0; i < ListOfInterests.Count; i++)
+        {
+            ListOfInterests[i]._active = _personalityActive;
+            Console.WriteLine(ListOfInterests[i]._active);
+
+        }
+
+    }
+
+    public void ProfilePageLoader()
+    {
+        BackgroundProfile = new Page("BG profile");
+        AddChild(BackgroundProfile);
+
+        for (int j = 0; j < 7; j++)
+        {
+            if (j <= 4)
+            {
+                var Hobby = new InterestList(_BoxesXHobbies, _BoxesYHobbies + (70 * j), j + 1, 1);
+                AddChild(Hobby);
+                ListOfHobbies.Add(Hobby);
+            }
+
+            if (j > 4)
+            {
+                _BoxesXHobbies = 700;
+                var Hobby = new InterestList(_BoxesXHobbies, _BoxesYHobbies + (70 * (j - 5)), j + 1, 2);
+                AddChild(Hobby);
+                ListOfHobbies.Add(Hobby);
+            }
+        }
+
+        GenderSwitch = new Switch(width / 2 - 268, 878);
+        AddChild(GenderSwitch);
+
+        HobbyTextBox1 = new Text(ListOfHobbies[0], "Intellectueel", HobbiesList);
+        AddChild(HobbyTextBox1);
+        HobbyTextBox2 = new Text(ListOfHobbies[1], "Veel passie", HobbiesList);
+        AddChild(HobbyTextBox2);
+        HobbyTextBox3 = new Text(ListOfHobbies[2], "Deppresief", HobbiesList);
+        AddChild(HobbyTextBox3);
+        HobbyTextBox4 = new Text(ListOfHobbies[3], "Langzaam", HobbiesList);
+        AddChild(HobbyTextBox4);
+        HobbyTextBox5 = new Text(ListOfHobbies[4], "Help, I'm captive", HobbiesList);
+        AddChild(HobbyTextBox5);
+        HobbyTextBox6 = new Text(ListOfHobbies[5], "Help, I'm 6", HobbiesList);
+        AddChild(HobbyTextBox6);
+        HobbyTextBox7 = new Text(ListOfHobbies[6], "Help, I'm captive", HobbiesList);
+        AddChild(HobbyTextBox7);
+    }
+
+    public void SettingsLoader()
+    {
+        BackgroundSettings= new Page("BG settings");
+        AddChild(BackgroundSettings);
+
+        MusicVolumeButton = new UpAndDownButton();
+        MusicVolumeButton.SetXY(1155, 338);
+        AddChild(MusicVolumeButton);
+
+        SFXVolumeButton = new UpAndDownButton();
+        SFXVolumeButton.SetXY(1155, 456);
+        AddChild(SFXVolumeButton);
+
+        MusicVolumeText = new GeneralText(MusicVolumeButton);
+        MusicVolumeText.SetXY(MusicVolumeButton.x - 250, MusicVolumeButton.y - 182);
+        AddChild(MusicVolumeText);
+
+        SFXVolumeText = new GeneralText(SFXVolumeButton);
+        SFXVolumeText.SetXY(SFXVolumeButton.x - 250, SFXVolumeButton.y - 182);
+        AddChild(SFXVolumeText);
+    }
+
+    public void PersonalityPageLoader()
+    {
+        BackgroundPersonality = new Page("BG personality");
+        AddChild(BackgroundPersonality);
+
+        for (int j = 0; j < 7; j++)
+        {
+            if (j <= 4)
+            {
+                var Interests = new InterestList(_BoxesXInterests, _BoxesYInterests + (70 * j), j + 1, 1);
+                AddChild(Interests);
+                ListOfInterests.Add(Interests);
+            }
+
+            if (j > 4)
+            {
+                _BoxesXInterests = 700;
+                var Interests = new InterestList(_BoxesXInterests, _BoxesYInterests + (70 * (j - 5)), j + 1, 2);
+                AddChild(Interests);
+                ListOfInterests.Add(Interests);
+            }
+        }
+
+        textBox1 = new Text(ListOfInterests[0], "Persoonlijkheid 1", InterestList);
+        AddChild(textBox1);
+        textBox2 = new Text(ListOfInterests[1], "Persoonlijkheid 2", InterestList);
+        AddChild(textBox2);
+        textBox3 = new Text(ListOfInterests[2], "Persoonlijkheid 3", InterestList);
+        AddChild(textBox3);
+        textBox4 = new Text(ListOfInterests[3], "Persoonlijkheid 4", InterestList);
+        AddChild(textBox4);
+        textBox5 = new Text(ListOfInterests[4], "Persoonlijkheid 5", InterestList);
+        AddChild(textBox5);
+        textBox6 = new Text(ListOfInterests[5], "Persoonlijkheid 6", InterestList);
+        AddChild(textBox6);
+        textBox7 = new Text(ListOfInterests[6], "Persoonlijkheid 7", InterestList);
+        AddChild(textBox7);
+    }
+
+    public void ProfilePage()
+    {
+        HobbyTextBox1.CheckForList(HobbiesList);
+        HobbyTextBox2.CheckForList(HobbiesList);
+        HobbyTextBox3.CheckForList(HobbiesList);
+        HobbyTextBox4.CheckForList(HobbiesList);
+        HobbyTextBox5.CheckForList(HobbiesList);
+        HobbyTextBox6.CheckForList(HobbiesList);
+        HobbyTextBox7.CheckForList(HobbiesList);
+
+        //Console.WriteLine(InterestList.Count);
+        if (Input.GetKeyDown(Key.L))
+        {
+            //InterestList.ToArray();
+            Console.WriteLine("it works 1/2");
+            for (int i = 0; i < HobbiesList.Count; i++)
+            {
+                Console.WriteLine(HobbiesList[i].GetDisplayedText());
+                Console.WriteLine("it works-ish");
+            }
+        }
+    }
+
+    public void PersonalityPage()
+    {
+        textBox1.CheckForList(InterestList);
+        textBox2.CheckForList(InterestList);
+        textBox3.CheckForList(InterestList);
+        textBox4.CheckForList(InterestList);
+        textBox5.CheckForList(InterestList);
+        textBox6.CheckForList(InterestList);
+        textBox7.CheckForList(InterestList);
+
+        //Console.WriteLine(InterestList.Count);
+        if (Input.GetKeyDown(Key.L))
+        {
+            //InterestList.ToArray();
+            Console.WriteLine("it works 1/2");
+            for (int i = 0; i < InterestList.Count; i++)
+            {
+                Console.WriteLine(InterestList[i].GetDisplayedText());
+                Console.WriteLine("it works-ish");
+            }
+        }
+    }
+
+    public void HideProfile()
+    {
+        if (ScreenNumber != 1)
+        {
+            GenderSwitch.visible = false;
+            HobbyTextBox1.visible = false;
+            HobbyTextBox2.visible = false;
+            HobbyTextBox3.visible = false;
+            HobbyTextBox4.visible = false;
+            HobbyTextBox5.visible = false;
+            HobbyTextBox6.visible = false;
+            HobbyTextBox7.visible = false;
+
+            ListOfHobbies[0].visible = false;
+            ListOfHobbies[1].visible = false;
+            ListOfHobbies[2].visible = false;
+            ListOfHobbies[3].visible = false;
+            ListOfHobbies[4].visible = false;
+            ListOfHobbies[5].visible = false;
+            ListOfHobbies[6].visible = false;
+
+            _profileActive = false;
+
+
+            BackgroundProfile.visible = false;
+
+        }
+        else
+        {
+            GenderSwitch.visible = true;
+            HobbyTextBox1.visible = true;
+            HobbyTextBox2.visible = true;
+            HobbyTextBox3.visible = true;
+            HobbyTextBox4.visible = true;
+            HobbyTextBox5.visible = true;
+            HobbyTextBox6.visible = true;
+            HobbyTextBox7.visible = true;
+
+            ListOfHobbies[0].visible = true;
+            ListOfHobbies[1].visible = true;
+            ListOfHobbies[2].visible = true;
+            ListOfHobbies[3].visible = true;
+            ListOfHobbies[4].visible = true;
+            ListOfHobbies[5].visible = true;
+            ListOfHobbies[6].visible = true;
+
+            _profileActive = true;
+            BackgroundProfile.visible = true;
+
+        }
+    }
+
+    public void HideSettings()
+    {
+        if (ScreenNumber != 2)
+        {
+            MusicVolumeButton.visible = false;
+            SFXVolumeButton.visible = false;
+            MusicVolumeText.visible = false;
+            SFXVolumeText.visible = false;
+            _settingsActive = false;
+            BackgroundSettings.visible = false;
+        }
+        else
+        {
+            MusicVolumeButton.visible = true;
+            SFXVolumeButton.visible = true;
+            MusicVolumeText.visible = true;
+            SFXVolumeText.visible = true;
+
+            _settingsActive = true;
+
+            BackgroundSettings.visible = true;
+        }
+    }
+
+    public void HidePersonality()
+    {
+        if (ScreenNumber != 0)
+        {
+            //GenderSwitch.visible = false;
+            textBox1.visible = false;
+            textBox2.visible = false;
+            textBox3.visible = false;
+            textBox4.visible = false;
+            textBox5.visible = false;
+            textBox6.visible = false;
+            textBox7.visible = false;
+            _personalityActive = false;
+            BackgroundPersonality.visible = false;
+        }
+        else
+        {
+           // GenderSwitch.visible = true;
+            textBox1.visible = true;
+            textBox2.visible = true;
+            textBox3.visible = true;
+            textBox4.visible = true;
+            textBox5.visible = true;
+            textBox6.visible = true;
+            textBox7.visible = true;
+            _personalityActive = true;
+            BackgroundPersonality.visible = true;
+        }
     }
 }

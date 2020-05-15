@@ -37,10 +37,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Background.cs" />
+    <Compile Include="Page.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Clock.cs" />
     <Compile Include="Foreground.cs" />
+    <Compile Include="GeneralText.cs" />
     <Compile Include="InterestList.cs" />
     <Compile Include="GXPEngine\Canvas.cs" />
     <Compile Include="GXPEngine\Game.cs" />
@@ -76,8 +78,69 @@
     <Compile Include="GXPEngine\AddOns\EasyDraw.cs" />
     <Compile Include="GXPEngine\Core\Collision.cs" />
     <Compile Include="MyGame.cs" />
+    <Compile Include="NextButton.cs" />
+    <Compile Include="Switch.cs" />
     <Compile Include="Text.cs" />
     <Compile Include="TextBox.cs" />
+    <Compile Include="UpAndDownButton.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\background.png" />
+    <Content Include="bin\Debug\barry.png" />
+    <Content Include="bin\Debug\BG personality.png" />
+    <Content Include="bin\Debug\BG profile.png" />
+    <Content Include="bin\Debug\BG settings.png" />
+    <Content Include="bin\Debug\blocks.png" />
+    <Content Include="bin\Debug\borders.png" />
+    <Content Include="bin\Debug\Button next.png" />
+    <Content Include="bin\Debug\Button prototype1.png" />
+    <Content Include="bin\Debug\Button prototype2.png" />
+    <Content Include="bin\Debug\Button prototype3.png" />
+    <Content Include="bin\Debug\Button prototype4.png" />
+    <Content Include="bin\Debug\Button prototype5.png" />
+    <Content Include="bin\Debug\Button prototype6.png" />
+    <Content Include="bin\Debug\Button prototype7.png" />
+    <Content Include="bin\Debug\button-sprite.png" />
+    <Content Include="bin\Debug\button.png" />
+    <Content Include="bin\Debug\ButtonUpDown.png" />
+    <Content Include="bin\Debug\character_spritesheet.png" />
+    <Content Include="bin\Debug\checkers.png" />
+    <Content Include="bin\Debug\circle.png" />
+    <Content Include="bin\Debug\colors.png" />
+    <Content Include="bin\Debug\foreground.png" />
+    <Content Include="bin\Debug\GXPEngine.exe" />
+    <Content Include="bin\Debug\GXPEngine.pdb" />
+    <Content Include="bin\Debug\lib\COPYING.txt" />
+    <Content Include="bin\Debug\lib\Fmod.License.txt" />
+    <Content Include="bin\Debug\lib\fmodex.dll" />
+    <Content Include="bin\Debug\lib\glfw.dll" />
+    <Content Include="bin\Debug\placeholder.png" />
+    <Content Include="bin\Debug\placeholder1.png" />
+    <Content Include="bin\Debug\placeholder2.png" />
+    <Content Include="bin\Debug\spritesheet_clock.png" />
+    <Content Include="bin\Debug\spritesheet_sam.png" />
+    <Content Include="bin\Debug\square.png" />
+    <Content Include="bin\Debug\Switch prototype.png" />
+    <Content Include="bin\Debug\textbox.jpg" />
+    <Content Include="bin\Debug\textbox.png" />
+    <Content Include="bin\Debug\time-up.wav" />
+    <Content Include="bin\Debug\triangle.png" />
+    <Content Include="obj\x86\Debug\GXPEngine.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\x86\Debug\GXPEngine.exe" />
+    <Content Include="obj\x86\Debug\GXPEngine.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\GXPEngine.exe.config" />
+    <None Include="bin\Debug\lib\libfmodex-4.34.05.so" />
+    <None Include="bin\Debug\lib\libfmodex.dylib" />
+    <None Include="bin\Debug\lib\libglfw.dylib" />
+    <None Include="bin\Debug\lib\libglfw.so" />
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\x86\Debug\GXPEngine.csprojAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\x86\Debug\TempPE\" />
+  </ItemGroup>
 </Project>

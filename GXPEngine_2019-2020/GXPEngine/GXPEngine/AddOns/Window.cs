@@ -106,7 +106,7 @@ namespace GXPEngine {
 				current = current.parent;
 			}
 
-			if (current is Game) {// otherwise, the camera is not in the scene hierarchy, so render nothing - not even a black background
+			if (current is Game) {// otherwise, the camera is not in the scene hierarchy, so render nothing - not even a black Page
 				Game main=Game.main;
 				SetRenderRange();
 				main.SetViewport (_windowX, _windowY, _width, _height);
