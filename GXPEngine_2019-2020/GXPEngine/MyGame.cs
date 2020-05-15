@@ -155,34 +155,15 @@ public class MyGame : Game
     public MyGame() : base(1920, 1080, false, false)
     {
         targetFps = 60;
-
-        _timeup = new Sound("time-up.wav");
-
-        _background = new Background(width, height);
-        AddChild(_background);
-
-        _charater = new Character(550, 300);
-        AddChild(_charater);
-
-        _clock = new Clock((width / 6) * 5, 0);
-        AddChild(_clock);
-
-        _foreground = new Foreground(width, height);
-        AddChild(_foreground);
-
-        _textBox = new TextBox(400, 800, _textboxText);
-        AddChild(_textBox);
-
         _frametimer /= 60;
-
         _dateSuccess = 0;
-        _gender = 0;
+
+        StartGame();
 
         Next = new NextButton();
         Next.SetXY(900, 900);
         AddChild(Next);
 
-       
         PersonalityPageLoader();
         ProfilePageLoader();
         SettingsLoader();
@@ -190,122 +171,6 @@ public class MyGame : Game
         BackgroundPersonality.visible = false;
         BackgroundProfile.visible = false;
         BackgroundSettings.visible = false;
-
-        if (_gender == _female)
-        {
-            // Questions Sam
-            _question1 = "Nervous?";
-            _question2 = "Don�t be shy, I don�t bite";
-            _question3 = "� � �";
-            _question4 = "How old are you?";
-            _question5 = "What do you do for a living?";
-            _subQuestion1 = "You must like animals?";
-            _subQuestion2 = "Lizards are cool. Do you have any yourself?";
-            _subQuestion3 = "I guess I�m neutral� Not like but not dislike.";
-            _subQuestion4 = "Oh those things�";
-            _question6 = "What do you like to do on the weekends?";
-            _subQuestion5 = "What kind of books do you read?";
-            _subQuestion6 = "Probably fantasy as well.";
-            _subQuestion7 = "Romance for sure.";
-            _subQuestion8 = "Non-fiction.";
-            _question7 = "I like your shirt.";
-            _question8 = "If you were a cat, what kind of cat would you be?";
-            _question9 = "What size are you?";
-            _subQuestion9 = "Yeah, clothing.";
-            _subQuestion10 = "No, I mean how tall you are.";
-            _subQuestion11 = "No, your �size�.";
-            _question10 = "What is your favorite thing to do with friends?";
-            _subQuestion12 = "DnD? What is that?";
-            _subQuestion13 = "Oh nice, do you dm or just play?";
-            _subQuestion14 = "DnD? You�re a nerd.";
-
-            // Answers Sam
-            _answers1 = "Yeah, first time speeddating haha� ";
-            _answers2 = "Haha� I know�";
-            _answers3 = "� � �";
-            _answers4 = "I�m twentyone almost twentytwo.";
-            _answers5 = "I�m a student, I�m studying to become a vet.";
-            _subAnswer1 = "Yes all animals are great. The once I like the most are reptiles like \n lizards.";
-            _subAnswer2 = "Yes I own two, also a snake.";
-            _subAnswer3 = "That�s fine.";
-            _subAnswer4 = "You don�t like them�";
-            _answers6 = "I guess reading.";
-            _subAnswer5 = "Mostly fantasy� a-and you?";
-            _subAnswer6 = "Really, maybe you can recommend me some books.";
-            _subAnswer7 = "Ah I know uhm.. a few book like that.";
-            _subAnswer8 = "I see�";
-            _answers7 = "Really, it is one of my favorites. Glad you like it.";
-            _answers8 = "Like a� housecat. Just napping in the sun on a nice pillow sounds \n nice.";
-            _answers9 = "Size, you mean clothing right?";
-            _subAnswer9 = "Oh, just a M�";
-            _subAnswer10 = "Uhm� 1.65 I think�";
-            _subAnswer11 = "W-why would you want to know that!";
-            _answers10 = "I like to play DnD with them.";
-            _subAnswer12 = "Oh it is a kind of game.";
-            _subAnswer13 = "I prefer just playing� I'm not really suited for dming� ";
-            _subAnswer14 = "What? No�";
-            _textboxText = "Hi, I'm Sam. So...";
-            _text1 = _question1;
-            _text2 = _question2;
-            _text3 = _question3;
-            _charater.currentFrame = _shyEmotionSam;
-        }
-        else if (_gender == _male)
-        {
-            // Questions Isabella
-            _question1 = "Yeah.";
-            _question2 = "No.";
-            _question3 = "I talk to a few already.";
-            _question4 = "Yeah I love alcohol!";
-            _question5 = "Yeah, the opportunity to meet new people and talk \n to friends is great.";
-            _question6 = "No, staying at home is better.";
-            _subQuestion1 = "Netflix or other series.";
-            _subQuestion2 = "Just a bit of reading.";
-            _subQuestion3 = "Staring at the celling contemplating life and existence \n itself.";
-            _subQuestion4 = "My best friend, I need someone to spend time with.";
-            _subQuestion5 = "Phone, even if I can�t call for help I can keep myself \n entertained.";
-            _subQuestion6 = "A gun, to kill myself and this stupid question.";
-            _subQuestion7 = "So is your size?";
-            _subQuestion8 = "What do you do for a living?";
-            _question7 = "What do you like to do on the weekends?";
-            _question8 = "Yes.";
-            _question9 = "No, but I love to do other kinds of sports.";
-            _subQuestion9 = "No, I prefer staying home.";
-
-            // Answers Isabella
-            _answers1 = "Aww don�t be nervous. It is fun. So anyway, you like going out? \n Like going for a drink?";
-            _answers2 = "Well let�s hope today is the last time for both of us. So anyway, you \n like going out? Like going for a drink?";
-            _answers3 = "So you�re getting the hang of it, that�s good. So anyway, you like \n going out? Like going for a drink?";
-            _answers4 = "I didn�t mean the alcohol necessary�";
-            _answers5 = "Me too, going out and socializing is amazing. I know this amazing \n bar, the atmosphere is so great. And there are so many nice people. \n Maybe we can go there after this.";
-            _answers6 = "Staying at home? That�s too bad. I personally like going out a lot. \n But what do you do then when you stay home?";
-            _subAnswer1 = "Watching stuff. I like to do that when I don�t have anything to do. \n There are so many interesting series to watch but so little time to watch them.";
-            _subAnswer2 = "Reading huh. Sounds nice, sitting comfy at home getting sucked into \n a story. Maybe I should read more myself. Maybe you can recommend \n some titles later.";
-            _subAnswer3 = "Are you okay? Maybe you should talk to someone about it.";
-            _subAnswer4 = "So it may be a bit clich� but it is an interesting question. What would \n you take with you when going to a deserted island?";
-            _subAnswer5 = "Sounds like a fun time. Mind if I you as well. A island is not really \n deserted when people are there. And together it will be easier to \n leave.";
-            _subAnswer6 = "Guess that is important. But what if there is no internet, it can�t really \n do anything without it.";
-            _subAnswer7 = "Well you didn�t have to say it like that�";
-            _subAnswer8 = "Tell you mine if you tell me yours.";
-            _answers7 = "I�m a biology teacher. It is both beautiful and sad when a year passes \n and you have to say goodbye to another group. But I love teaching \n the children and seeing them grow as humans.";
-            _answers8 = "I like climbing. Usually indoors but I love to climb real mountains. \n I have done it a few times already. You feel so alive when you�re at \n the top. Do you like climbing?";
-            _answers9 = "Let go climbing together after this. We can go to a hall close to here \n or maybe we can go to a real mountain. I�m planning to go to Nepal \n next to climb Mera Peak.";
-            _subAnswer9 = "That�s nice. Moving around makes you feel good, right? I don�t mind \n other kinds of exercise but personally climbing is my favorite.";
-            _subAnswer10 = "That�s too bad.";
-
-            _textboxText = "Hello, I�m Isabella. Nice to meet you. So is this your first time speed \n dating?";
-            _text1 = _question1;
-            _text2 = _question2;
-            _text3 = _question3;
-            _charater.currentFrame = _neutralEmotionIsabella;
-        }
-
-        _button1 = new Button(1300, 500, _text1);
-        AddChild(_button1);
-        _button2 = new Button(1300, 650, _text2);
-        AddChild(_button2);
-        _button3 = new Button(1300, 800, _text3);
-        AddChild(_button3);
     }
 
     //=======================================================================
@@ -322,6 +187,9 @@ public class MyGame : Game
             SelectAnswersIsabella();
         }
 
+        _gender = GenderSwitch.GetSwitchSetting();
+
+        SwitchToCharacter();
         CheckTimer();
         CheckEnding();
 
@@ -357,6 +225,145 @@ public class MyGame : Game
         HidePersonality();
     }
 
+    void StartGame()
+    {
+        _timeup = new Sound("time-up.wav");
+
+        _background = new Background(width, height);
+        AddChild(_background);
+
+        _charater = new Character(550, 300);
+        AddChild(_charater);
+
+        _clock = new Clock((width / 6) * 5, 0);
+        AddChild(_clock);
+
+        _foreground = new Foreground(width, height);
+        AddChild(_foreground);
+
+        _textBox = new TextBox(400, 800, _textboxText);
+        AddChild(_textBox);
+
+        _button1 = new Button(1300, 500, _text1);
+        AddChild(_button1);
+        _button2 = new Button(1300, 650, _text2);
+        AddChild(_button2);
+        _button3 = new Button(1300, 800, _text3);
+        AddChild(_button3);
+    }
+
+    void SwitchToCharacter()
+    {
+        if (_gender == _female)
+        {
+            // Questions Sam
+            _question1 = "Nervous?";
+            _question2 = "Don't be shy, I don't bite";
+            _question3 = "... ... ...";
+            _question4 = "How old are you?";
+            _question5 = "What do you do for a living?";
+            _subQuestion1 = "You must like animals?";
+            _subQuestion2 = "Lizards are cool. Do you have any yourself?";
+            _subQuestion3 = "I guess I'm neutral... Not like but not dislike.";
+            _subQuestion4 = "Oh those things...";
+            _question6 = "What do you like to do on the weekends?";
+            _subQuestion5 = "What kind of books do you read?";
+            _subQuestion6 = "Probably fantasy as well.";
+            _subQuestion7 = "Romance for sure.";
+            _subQuestion8 = "Non-fiction.";
+            _question7 = "I like your shirt.";
+            _question8 = "If you were a cat, what kind of cat would you be?";
+            _question9 = "What size are you?";
+            _subQuestion9 = "Yeah, clothing.";
+            _subQuestion10 = "No, I mean how tall you are.";
+            _subQuestion11 = "No, your 'size'.";
+            _question10 = "What is your favorite thing to do with friends?";
+            _subQuestion12 = "DnD? What is that?";
+            _subQuestion13 = "Oh nice, do you dm or just play?";
+            _subQuestion14 = "DnD? You�re a nerd.";
+
+            // Answers Sam
+            _answers1 = "Yeah, first time speeddating haha� ";
+            _answers2 = "Haha, I know.";
+            _answers3 = "... ... ...";
+            _answers4 = "I'm twentyone almost twentytwo.";
+            _answers5 = "I'm a student, I'm studying to become a vet.";
+            _subAnswer1 = "Yes all animals are great. The once I like the most are reptiles like \n lizards.";
+            _subAnswer2 = "Yes I own two, also a snake.";
+            _subAnswer3 = "That's fine.";
+            _subAnswer4 = "You don't like them�";
+            _answers6 = "I guess reading.";
+            _subAnswer5 = "Mostly fantasy... a-and you?";
+            _subAnswer6 = "Really, maybe you can recommend me some books.";
+            _subAnswer7 = "Ah I know uhm.. a few book like that.";
+            _subAnswer8 = "I see...";
+            _answers7 = "Really, it is one of my favorites. Glad you like it.";
+            _answers8 = "Like a housecat. Just napping in the sun on a nice pillow sounds \n nice.";
+            _answers9 = "Size, you mean clothing right?";
+            _subAnswer9 = "Oh, just a M...";
+            _subAnswer10 = "Uhm... 1.65 I think...";
+            _subAnswer11 = "W-why would you want to know that!";
+            _answers10 = "I like to play DnD with them.";
+            _subAnswer12 = "Oh it is a kind of game.";
+            _subAnswer13 = "I prefer just playing� I'm not really suited for dming...";
+            _subAnswer14 = "What? No...";
+            _textboxText = "Hi, I'm Sam. So...";
+            _text1 = _question1;
+            _text2 = _question2;
+            _text3 = _question3;
+            _charater.currentFrame = _shyEmotionSam;
+        }
+        else if (_gender == _male)
+        {
+            // Questions Isabella
+            _question1 = "Yeah.";
+            _question2 = "No.";
+            _question3 = "I talk to a few already.";
+            _question4 = "Yeah I love alcohol!";
+            _question5 = "Yeah, the opportunity to meet new people and talk \n to friends is great.";
+            _question6 = "No, staying at home is better.";
+            _subQuestion1 = "Netflix or other series.";
+            _subQuestion2 = "Just a bit of reading.";
+            _subQuestion3 = "Staring at the celling contemplating life and existence \n itself.";
+            _subQuestion4 = "My best friend, I need someone to spend time with.";
+            _subQuestion5 = "Phone, even if I can't call for help I can keep myself \n entertained.";
+            _subQuestion6 = "A gun, to kill myself and this stupid question.";
+            _subQuestion7 = "So is your size?";
+            _subQuestion8 = "What do you do for a living?";
+            _question7 = "What do you like to do on the weekends?";
+            _question8 = "Yes.";
+            _question9 = "No, but I love to do other kinds of sports.";
+            _subQuestion9 = "No, I prefer staying home.";
+
+            // Answers Isabella
+            _answers1 = "Aww don't be nervous. It is fun. So anyway, you like going out? \n Like going for a drink?";
+            _answers2 = "Well let's hope today is the last time for both of us. So anyway, you \n like going out? Like going for a drink?";
+            _answers3 = "So you're getting the hang of it, that's good. So anyway, you like \n going out? Like going for a drink?";
+            _answers4 = "I didn't mean the alcohol necessary...";
+            _answers5 = "Me too, going out and socializing is amazing. I know this amazing \n bar, the atmosphere is so great. And there are so many nice people. \n Maybe we can go there after this.";
+            _answers6 = "Staying at home? That's too bad. I personally like going out a lot. \n But what do you do then when you stay home?";
+            _subAnswer1 = "Watching stuff. I like to do that when I don't have anything to do. \n There are so many interesting series to watch but so little time to watch them.";
+            _subAnswer2 = "Reading huh. Sounds nice, sitting comfy at home getting sucked into \n a story. Maybe I should read more myself. Maybe you can recommend \n some titles later.";
+            _subAnswer3 = "Are you okay? Maybe you should talk to someone about it.";
+            _subAnswer4 = "So it may be a bit cliche but it is an interesting question. What would \n you take with you when going to a deserted island?";
+            _subAnswer5 = "Sounds like a fun time. Mind if I you as well. A island is not really \n deserted when people are there. And together it will be easier to \n leave.";
+            _subAnswer6 = "Guess that is important. But what if there is no internet, I can't really \n do anything without it.";
+            _subAnswer7 = "Well you didn't have to say it like that...";
+            _subAnswer8 = "Tell you mine if you tell me yours.";
+            _answers7 = "I'm a biology teacher. It is both beautiful and sad when a year passes \n and you have to say goodbye to another group. But I love teaching \n the children and seeing them grow as humans.";
+            _answers8 = "I like climbing. Usually indoors but I love to climb real mountains. \n I have done it a few times already. You feel so alive when you're at \n the top. Do you like climbing?";
+            _answers9 = "Let go climbing together after this. We can go to a hall close to here \n or maybe we can go to a real mountain. I'm planning to go to Nepal \n next to climb Mera Peak.";
+            _subAnswer9 = "That's nice. Moving around makes you feel good, right? I don't mind \n other kinds of exercise but personally climbing is my favorite.";
+            _subAnswer10 = "That's too bad.";
+
+            _textboxText = "Hello, I'm Isabella. Nice to meet you. So is this your first time speed \n dating?";
+            _text1 = _question1;
+            _text2 = _question2;
+            _text3 = _question3;
+            _charater.currentFrame = _neutralEmotionIsabella;
+        }
+    }
+
     void CheckTimer()
     {
         _frametimer += 1;
@@ -376,7 +383,7 @@ public class MyGame : Game
 
             if (_text1 == "*Well, damn...*" && _gender == _male)
             {
-                _textboxText = "Oh� Its time� um goodbye�";
+                _textboxText = "Oh... Its time... um goodbye...";
             }
             else if (_text1 == "*Well, damn...*" && _gender == _female)
             {
@@ -511,7 +518,7 @@ public class MyGame : Game
         {
             switch (_text2)
             {
-                case "Don�t be shy, I don�t bite":
+                case "Don't be shy, I don't bite":
                     _charater.currentFrame = _shyEmotionSam;
                     _text1 = _question4;
                     _text2 = _question5;
@@ -534,7 +541,7 @@ public class MyGame : Game
                     _textboxText = _subAnswer1;
                     _dateSuccess += 2;
                     break;
-                case "I guess I�m neutral� Not like but not dislike.":
+                case "I guess I'm neutral... Not like but not dislike.":
                     _charater.currentFrame = _neutralEmotionSam;
                     _text1 = _question7;
                     _text2 = _question8;
@@ -582,7 +589,7 @@ public class MyGame : Game
         {
             switch (_text3)
             {
-                case "� � �":
+                case "... ... ...":
                     _charater.currentFrame = _uninterestedEmotionSam;
                     _text1 = _question4;
                     _text2 = _question5;
@@ -598,7 +605,7 @@ public class MyGame : Game
                     _textboxText = _answers6;
                     _dateSuccess += 1;
                     break;
-                case "Oh those things�":
+                case "Oh those things...":
                     _charater.currentFrame = _insultedEmotionSam;
                     _text1 = _question7;
                     _text2 = _question8;
@@ -630,7 +637,7 @@ public class MyGame : Game
                     _textboxText = _answers9;
                     _dateSuccess -= 1;
                     break;
-                case "No, your �size�.":
+                case "No, your 'size'.":
                     _charater.currentFrame = _insultedEmotionSam;
                     _text1 = "*Say goodbyes*";
                     _text2 = " ";
@@ -638,7 +645,7 @@ public class MyGame : Game
                     _textboxText = _subAnswer11;
                     _dateSuccess -= 2;
                     break;
-                case "DnD? You�re a nerd.":
+                case "DnD? You're a nerd.":
                     _charater.currentFrame = _insultedEmotionSam;
                     _text1 = "*Say goodbyes*";
                     _text2 = " ";
@@ -766,7 +773,7 @@ public class MyGame : Game
                     _text3 = " ";
                     _textboxText = _subAnswer2;
                     break;
-                case "Phone, even if I can�t call for help I can keep myself \n entertained.":
+                case "Phone, even if I can't call for help I can keep myself \n entertained.":
                     _charater.currentFrame = _neutralEmotionIsabella;
                     _text1 = _subQuestion7;
                     _text2 = _subQuestion8;

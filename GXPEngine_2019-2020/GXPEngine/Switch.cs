@@ -27,7 +27,6 @@ class Switch : AnimationSprite
     {
         SetFrame(_switchPosition);
         CollisionDetection();
-        GetSwitchSetting();
     }
 
     //=======================================================================
@@ -49,7 +48,7 @@ class Switch : AnimationSprite
     //=======================================================================
     //                                              CollisionDetection();
     //=======================================================================
-    public void CollisionDetection()
+    void CollisionDetection()
     {
         if (Input.GetMouseButtonDown(0) && pointRect(Input.mouseX, Input.mouseY, x, y, this.width, this.height) && _switchPosition == 0)
         {
@@ -64,15 +63,15 @@ class Switch : AnimationSprite
     //=======================================================================
     //                                              GetSwitchSetting();
     //=======================================================================
-    public string GetSwitchSetting()
+    public int GetSwitchSetting()
     {
         if (_switchPosition == 0)
         {
-            return "Female";
+            return 1;
         }
         else
         {
-            return "Male";
+            return 0;
         }
     }
 }

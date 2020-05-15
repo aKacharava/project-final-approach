@@ -64,7 +64,7 @@ public class InterestList : AnimationSprite
     //=======================================================================
     //                                              CollisionDetection();
     //=======================================================================
-    public void CollisionDetection()
+    void CollisionDetection()
     {
         if (Input.GetMouseButtonDown(0) && pointRect(Input.mouseX, Input.mouseY, x, y, this.width, this.height) && _positionOfBox == 0)
         {
