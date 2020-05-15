@@ -78,9 +78,4 @@ public class UpAndDownButton : Sprite
     {
         return _value;
     }
-
-
-
-
 }
-
