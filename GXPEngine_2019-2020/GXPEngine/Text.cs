@@ -5,7 +5,6 @@ using GXPEngine;
 
 public class Text : Canvas
 {
-
     private InterestList _dummyBox;
     string _textDisplayed;
 
@@ -16,8 +15,6 @@ public class Text : Canvas
 
         //graphics.ScaleTransform(2, 2);
         graphics.DrawString(_textDisplayed, SystemFonts.DefaultFont, Brushes.White, 0 + _dummyBox.width / 5, _dummyBox.y + _dummyBox.height / 3);
-        
-
     }
 
     void Update()

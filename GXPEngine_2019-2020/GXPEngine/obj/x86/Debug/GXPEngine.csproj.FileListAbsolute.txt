@@ -10,3 +10,9 @@ C:\Users\geers\Desktop\project-final-approach\GXPEngine_2019-2020\GXPEngine\obj\
 C:\Users\geers\Desktop\project-final-approach\GXPEngine_2019-2020\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
 C:\Users\geers\Desktop\project-final-approach\GXPEngine_2019-2020\GXPEngine\obj\x86\Debug\GXPEngine.exe
 C:\Users\geers\Desktop\project-final-approach\GXPEngine_2019-2020\GXPEngine\obj\x86\Debug\GXPEngine.pdb
+C:\Users\kacha\Desktop\saxion work\Project Final Approach\project-final-approach\GXPEngine_2019-2020\GXPEngine\bin\Debug\GXPEngine.exe
+C:\Users\kacha\Desktop\saxion work\Project Final Approach\project-final-approach\GXPEngine_2019-2020\GXPEngine\bin\Debug\GXPEngine.pdb
+C:\Users\kacha\Desktop\saxion work\Project Final Approach\project-final-approach\GXPEngine_2019-2020\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+C:\Users\kacha\Desktop\saxion work\Project Final Approach\project-final-approach\GXPEngine_2019-2020\GXPEngine\obj\x86\Debug\GXPEngine.exe
+C:\Users\kacha\Desktop\saxion work\Project Final Approach\project-final-approach\GXPEngine_2019-2020\GXPEngine\obj\x86\Debug\GXPEngine.pdb
+C:\Users\kacha\Desktop\saxion work\Project Final Approach\project-final-approach\GXPEngine_2019-2020\GXPEngine\obj\x86\Debug\GXPEngine.csprojAssemblyReference.cache
